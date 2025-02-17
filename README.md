@@ -21,6 +21,10 @@ Council Tracker is a Rails app that tracks and publishes the motions, amendments
 2. `bundle exec rails server`
 3. If you get an error about `webpacker`, you may also need to run `bundle exec rails webpacker:install`.
 
+### Creating a test user
+1. `bundle exec rails console`
+2. `User.new(email_address: "test@test.com", password: "1234").save`
+
 ### Setting up image file storage
 
 TODO
