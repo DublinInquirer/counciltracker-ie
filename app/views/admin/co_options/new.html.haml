@@ -1,0 +1,9 @@
+%header.view-header
+  .wrapper{role: 'layout'}
+    .breadcrumbs
+      .breadcrumb= link_to 'Co-Options', [:admin, :co_options]
+      .breadcrumb= link_to 'New co-option', [:new, :admin, :co_option]
+
+.view-content
+  .wrapper{role: 'layout'}
+    = render partial: 'admin/co_options/form', locals: { co_option: @co_option }
