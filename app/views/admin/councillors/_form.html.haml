@@ -1,0 +1,36 @@
+= form_with model: [:admin, councillor], class: 'admin-form' do |f|
+  = render partial: 'admin/shared/errors', locals: {errors: councillor.errors}
+
+  = f.label :full_name
+  = f.text_field :full_name
+
+  .hint.p.-t5 If you enter full name, given/family names will be derived.
+
+  = f.label :given_name
+  = f.text_field :given_name
+
+  = f.label :family_name
+  = f.text_field :family_name
+
+  = f.label :born_on
+  = f.date_field :born_on
+
+  = f.label :portrait
+  = f.file_field :portrait
+
+  - if councillor.new_record?
+    %hr
+    %h3 Council membership
+    .hint.p.-t5 New councillors must be assigned to the current council with a party and local area.
+
+    = f.label :local_electoral_area_id, 'Local Electoral Area'
+    = f.collection_select :local_electoral_area_id, LocalElectoralArea.by_name, :id, :name, {prompt: 'Select area'}
+
+    = f.label :party_id, 'Party'
+    = f.collection_select :party_id, Party.by_name, :id, :name, {prompt: 'Select party'}
+
+    = f.label :seat_commenced_on, 'Seat start date'
+    = f.date_field :seat_commenced_on, value: Date.current
+
+  .actions
+    = f.submit 'Save', class: 'button'

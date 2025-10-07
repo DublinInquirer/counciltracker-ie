@@ -1,0 +1,9 @@
+%header.view-header
+  .wrapper{role: 'layout'}
+    .breadcrumbs
+      .breadcrumb= link_to 'Councillors', [:admin, :councillors]
+      .breadcrumb= link_to 'New councillor', [:new, :admin, :councillor]
+
+.view-content.-alpha
+  .wrapper{role: 'layout'}
+    = render partial: 'form', locals: { councillor: @councillor }

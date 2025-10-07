@@ -1,6 +1,8 @@
 %header.view-header
   .wrapper{role: 'layout'}
     %h1= link_to "Councillors", [:admin, :councillors]
+    .actions
+      = link_to "New councillor", [:new, :admin, :councillor], class: 'button'
 
 %main.view-content{role: 'layout'}
   .wrapper{role: 'layout'}

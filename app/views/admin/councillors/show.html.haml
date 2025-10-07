@@ -3,6 +3,8 @@
     .breadcrumbs
       .breadcrumb= link_to 'Councillors', [:admin, :councillors]
       .breadcrumb= link_to @councillor.full_name, [:admin, @councillor]
+      .record-actions
+        = link_to 'Edit', [:edit, :admin, @councillor], class: 'button'
 
 .view-content.-alpha
   .wrapper{role: 'layout'}
