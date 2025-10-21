@@ -16,10 +16,11 @@ class MotionsController < ApplicationController
       render plain: 'Unknown council', status: :not_found and return
     end
 
-    @motions = Motion.published.joins(:meeting)
-      .where(meetings: { council: @council })
-      .by_occurred_on
-      .page(params[:p])
+    scope = Motion.published.joins(:meeting)
+    if Meeting.column_names.include?("council")
+      scope = scope.where(meetings: { council: @council })
+    end
+    @motions = scope.by_occurred_on.page(params[:p])
 
     respond_to do |format|
       format.html { render :index }

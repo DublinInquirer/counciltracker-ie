@@ -74,10 +74,8 @@ class Admin::MeetingsController < Admin::ApplicationController
   private
 
   def meeting_params
-    params.require(:meeting).permit(
-      :meeting_type,
-      :occurred_on,
-      :council
-    )
+    permitted = [:meeting_type, :occurred_on]
+    permitted << :council if Meeting.column_names.include?("council")
+    params.require(:meeting).permit(*permitted)
   end
 end
