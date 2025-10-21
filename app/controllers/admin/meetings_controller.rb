@@ -26,7 +26,7 @@ class Admin::MeetingsController < Admin::ApplicationController
   end
 
   def new
-    @meeting = Meeting.new(occurred_on: (Date.current - 1))
+    @meeting = Meeting.new(occurred_on: (Date.current - 1), council: nil)
   end
 
   def create
