@@ -4,7 +4,9 @@
     .name= councillor.full_name
 
   .detail
-    .party= councillor.party.name
-    .area= councillor.local_electoral_area.name
+    - party = councillor.party
+    - lea = councillor.local_electoral_area
+    .party= party.present? ? party.name : '—'
+    .area= lea.present? ? lea.name : '—'
 
   %figure.figure.-portrait= image_tag councillor.portrait.url(:small), loading: 'lazy', alt: "Portrait of #{ councillor.full_name }"

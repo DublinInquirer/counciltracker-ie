@@ -5,11 +5,13 @@
       .breadcrumb= link_to @councillor.full_name, [:admin, @councillor]
       .record-actions
         = link_to 'Edit', [:edit, :admin, @councillor], class: 'button'
+        = button_to 'Delete', [:admin, @councillor], method: 'delete', class: 'button -danger', data: {confirm: "You sure? This can't be undone."}
 
 .view-content.-alpha
   .wrapper{role: 'layout'}
     .councillor-card
-      %figure.-portrait{class: "-#{ @councillor.party.slug }"}= image_tag @councillor.portrait.url(:medium), loading: 'lazy', alt: "Portrait of #{ @councillor.full_name }"
+      - party = @councillor.party
+      %figure.-portrait{class: (party.present? ? "-#{ party.slug }" : nil)}= image_tag @councillor.portrait.url(:medium), loading: 'lazy', alt: "Portrait of #{ @councillor.full_name }"
       .bio
         .meta-data
           .meta-data_block.-label
@@ -17,8 +19,8 @@
 
           .meta-data_block
             %p
-              = render partial: 'icons/party', locals: {party: @councillor.party}
-              = @councillor.party.name
+              = render partial: 'icons/party', locals: {party: party}
+              = party.present? ? party.name : '—'
             %p= @councillor.local_electoral_area_name
 
           - if @councillor.events.any?
