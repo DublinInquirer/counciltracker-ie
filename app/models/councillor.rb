@@ -43,12 +43,14 @@ class Councillor < ApplicationRecord
   end
 
   def party
-    @party ||= seats.order("commenced_on desc").take.party
+    return @party if defined?(@party)
+    latest_seat = seats.order("commenced_on desc").take
+    @party = latest_seat&.party
   end
 
   # lol
   def party_on(date)
-    seat_on(date).party
+    seat_on(date)&.party
   end
 
   def party_name
@@ -56,7 +58,9 @@ class Councillor < ApplicationRecord
   end
 
   def local_electoral_area
-    @local_electoral_area ||= seats.order("commenced_on desc").take.local_electoral_area
+    return @local_electoral_area if defined?(@local_electoral_area)
+    latest_seat = seats.order("commenced_on desc").take
+    @local_electoral_area = latest_seat&.local_electoral_area
   end
 
   def local_electoral_area_name

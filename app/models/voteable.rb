@@ -29,7 +29,6 @@ class Voteable < ApplicationRecord
 
   def redetermine_vote_result!
     return true unless rollcall?
-    return true if votes.where(status: "exception").any?
     self.vote_result = determine_vote_result
     return true unless vote_result_changed?
     save!
