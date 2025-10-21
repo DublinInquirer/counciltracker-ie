@@ -1,27 +1,11 @@
-- description "Tracking and publishing Dublin City Council's votes, motions, and amendments. See how your councillors are representing you on the council."
+- description "This website shows how your local councillors voted on issues you care about."
 - keywords "city council, vote tracking, open government"
 
 .slide
   .wrapper{role: 'layout'}
     .text-block.p.-t2
-      %h1 <a href="/">CouncilTracker.ie</a> tracks and publishes Dublin City Council's votes, motions, and amendments.
-    
-      %h3 Select your electoral area to see what your local representatives are doing on the council:
-
-      %ul.list.-sentence
-        - @local_electoral_areas.each do |area|
-          - count = area.active_councillors.count
-          %li= link_to raw("#{ render partial: 'icons/count', locals: {count: count} } #{ area.name }"), area
-    
-      %h3 Select a political party to see how its councillors vote on council motions:
-
-      %ul.list.-sentence
-        - @parties.each do |party|
-          %li= link_to raw("#{ render partial: 'icons/party', locals: {party: party} } #{ party.name }"), party
-
-      %h3 You can also view votes on motions that relate to particular topics:
-
-      %ul.list.-sentence
-        - @topics.each do |topic|
-          - count = Motion.published.in_category(topic).count
-          %li= link_to raw("#{ render partial: 'icons/count', locals: {count: count} } #{ topic }"), topic_path(topic.parameterize)
+      %h1 This website shows how your local councillors voted on issues you care about.
+      %h3 Which council area do you live in?
+      %p
+        %a.button{href: '/motions/dcc'} Dublin City Council
+        %a.button.-secondary{href: '/motions/fingal'} Fingal County Council

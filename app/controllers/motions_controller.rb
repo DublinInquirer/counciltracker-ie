@@ -10,6 +10,23 @@ class MotionsController < ApplicationController
     end
   end
 
+  def council
+    @council = params[:council].to_s.downcase
+    unless %w[dcc fingal].include?(@council)
+      render plain: 'Unknown council', status: :not_found and return
+    end
+
+    @motions = Motion.published.joins(:meeting)
+      .where(meetings: { council: @council })
+      .by_occurred_on
+      .page(params[:p])
+
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @motions.limit(5) }
+    end
+  end
+
   def show
     @motion = Motion.published.find_by(hashed_id: params[:id])
     @view = params[:view].try(:to_sym) || :votes

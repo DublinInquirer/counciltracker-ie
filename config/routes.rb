@@ -27,6 +27,8 @@ Rails.application.routes.draw do
 
   resources :motions, only: [:index, :show]
   get "motions/:id/:view(/:context)" => "motions#show"
+  get "motions/dcc" => "motions#council", defaults: { council: 'dcc' }
+  get "motions/fingal" => "motions#council", defaults: { council: 'fingal' }
 
   resources :amendments, only: [:show]
   get "amendments/:id/:view(/:context)" => "amendments#show"

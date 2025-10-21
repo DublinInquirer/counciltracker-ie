@@ -9,5 +9,10 @@
     .input
       = f.select :meeting_type, %w(monthly annual special budget finance)
 
+  .admin-form_field
+    = f.label :council, 'Council'
+    .input
+      = f.select :council, [['Dublin City Council', 'dcc'], ['Fingal County Council', 'fingal']], include_blank: true
+
   .admin-form_actions
     = f.submit 'Save', class: 'button'
