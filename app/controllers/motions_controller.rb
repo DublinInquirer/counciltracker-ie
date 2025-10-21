@@ -17,10 +17,11 @@ class MotionsController < ApplicationController
     end
 
     scope = Motion.published.joins(:meeting)
-    if Meeting.column_names.include?("council")
-      scope = scope.where(meetings: { council: @council })
+    @motions = if @council == 'dcc'
+      scope.where.not(meetings: { dcc_id: nil }).by_occurred_on.page(params[:p])
+    else
+      scope.where(meetings: { dcc_id: nil }).by_occurred_on.page(params[:p])
     end
-    @motions = scope.by_occurred_on.page(params[:p])
 
     respond_to do |format|
       format.html { render :index }

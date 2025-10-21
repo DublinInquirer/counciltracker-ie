@@ -12,12 +12,10 @@ class Meeting < ApplicationRecord
   validates :council_session, presence: true
   validates :occurred_on, presence: true, uniqueness: {scope: :meeting_type}
   validates :meeting_type, presence: true, inclusion: %w[monthly annual special budget finance]
-  validates :council, inclusion: %w[dcc fingal], allow_blank: true
 
   scope :by_occurred_on, -> { order("occurred_on desc") }
   scope :has_countable_attendances, -> { joins(:attendances).merge(Attendance.countable).distinct }
   scope :has_published_motions, -> { joins(:motions).merge(Motion.published).distinct }
-  scope :in_council, ->(c) { where(council: c) }
 
   paginates_per 20
 
