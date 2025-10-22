@@ -9,5 +9,7 @@
     .input
       = f.select :meeting_type, %w(monthly annual special budget finance)
 
+  -# Council selector removed for now to avoid migration friction
+
   .admin-form_actions
     = f.submit 'Save', class: 'button'

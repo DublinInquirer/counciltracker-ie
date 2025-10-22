@@ -26,7 +26,7 @@ class Admin::MeetingsController < Admin::ApplicationController
   end
 
   def new
-    @meeting = Meeting.new(occurred_on: (Date.current - 1))
+    @meeting = Meeting.new(occurred_on: (Date.current - 1), council: nil)
   end
 
   def create
@@ -76,7 +76,8 @@ class Admin::MeetingsController < Admin::ApplicationController
   def meeting_params
     params.require(:meeting).permit(
       :meeting_type,
-      :occurred_on
+      :occurred_on,
+      :council
     )
   end
 end

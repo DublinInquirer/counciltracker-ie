@@ -18,11 +18,13 @@
               - votes.each do |vote|
                 %li
                   = link_to vote.councillor do
+            - councillor = vote.councillor
+            - party = councillor.party
                     .enumerable.-councillor
-                      .indicator.party-indicator{title: vote.councillor.party.name}
-                        = render partial: 'icons/party', locals: {party: vote.councillor.party}
+              .indicator.party-indicator{title: (party.present? ? party.name : councillor.full_name)}
+                = render partial: 'icons/party', locals: {party: party}
                       .content
-                        .name= vote.councillor.full_name
+                .name= councillor.full_name
 
 - else
   .view-content.-omega

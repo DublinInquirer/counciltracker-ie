@@ -25,6 +25,9 @@ Rails.application.routes.draw do
   get "meetings/:meeting_type/:occurred_on" => "meetings#show", :as => :meeting_path
   get "meetings/:meeting_type/:occurred_on/:view(/:context)" => "meetings#show"
 
+  # Place specific council routes BEFORE the generic :id route to avoid collision
+  get "motions/dcc" => "motions#council", defaults: { council: 'dcc' }
+  get "motions/fingal" => "motions#council", defaults: { council: 'fingal' }
   resources :motions, only: [:index, :show]
   get "motions/:id/:view(/:context)" => "motions#show"
 

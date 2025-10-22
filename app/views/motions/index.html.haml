@@ -1,10 +1,15 @@
-- title 'Motions'
-- description "Motions tabled and voted upon by Dublin City Council"
+- title (@council == 'dcc' ? 'Dublin City Council Motions' : (@council == 'fingal' ? 'Fingal County Council Motions' : 'Motions'))
+- description (@council == 'dcc' ? "Motions tabled and voted upon by Dublin City Council" : (@council == 'fingal' ? "Motions tabled and voted upon by Fingal County Council" : "Motions tabled and voted upon by Dublin City Council and Fingal County Council"))
 - keywords "city council, motions, votes"
 
 %header.view-header
   .wrapper{role: 'layout'}
-    %h1= link_to "Motions", :motions
+    - if @council == 'dcc'
+      %h1= link_to "Dublin City Council Motions", "/motions/dcc"
+    - elsif @council == 'fingal'
+      %h1= link_to "Fingal County Council Motions", "/motions/fingal"
+    - else
+      %h1= link_to "Motions", :motions
 
 %main.view-content
   .wrapper{role: 'layout'}
