@@ -1,4 +1,4 @@
-ruby "3.2.2"
+ruby "3.3.6"
 source "https://rubygems.org"
 
 git_source(:github) do |repo_name|
@@ -34,6 +34,7 @@ gem "oj" # json
 gem "webpacker-svelte"
 gem "autoprefixer-rails"
 gem "appsignal"
+gem "rack-attack"
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]

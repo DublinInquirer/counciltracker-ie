@@ -15,5 +15,7 @@ module CouncilTracker
     config.generators do |g|
       g.assets false
     end
+
+    config.middleware.use Rack::Attack
   end
 end

@@ -270,6 +270,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.7.1)
     rack (2.2.8)
+    rack-attack (6.8.0)
+      rack (>= 1.0, < 4)
     rack-livereload (0.5.1)
       rack
     rack-mini-profiler (3.1.1)
@@ -484,6 +486,7 @@ DEPENDENCIES
   oj
   pg
   puma
+  rack-attack
   rack-livereload
   rack-mini-profiler
   rails (~> 6.1.x)
@@ -509,7 +512,7 @@ DEPENDENCIES
   webpacker-svelte
 
 RUBY VERSION
-   ruby 3.2.2p53
+   ruby 3.3.6p0
 
 BUNDLED WITH
    2.4.19
