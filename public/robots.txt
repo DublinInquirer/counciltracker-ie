@@ -1,5 +1,6 @@
 User-agent: *
 Crawl-delay: 10
+Disallow: /*?p=
 
 # Block AI training scrapers
 User-agent: GPTBot

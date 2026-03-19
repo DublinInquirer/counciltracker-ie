@@ -9,6 +9,14 @@ class Rack::Attack
     req.user_agent&.match?(BLOCKED_USER_AGENTS)
   end
 
+  # Block deep pagination requests — legitimate users never browse past page 50.
+  # Bots crawl hundreds or thousands of pages (e.g. OFFSET 305200 seen in logs).
+  MAX_PAGE = 50
+  blocklist("block deep pagination scraping") do |req|
+    page = req.params["p"].to_i
+    page > MAX_PAGE && req.path =~ %r{^/(councillors|meetings|motions|parties|areas|topics)}
+  end
+
   # Throttle all requests by IP: 60 requests per minute
   throttle("req/ip", limit: 60, period: 1.minute) do |req|
     req.ip unless req.path.start_with?("/assets")
