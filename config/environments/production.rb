@@ -15,7 +15,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address: "smtppro.zoho.com",
     port: 465,
-    authentication: :plain,
+    authentication: :login,
     ssl: true,
     user_name: ENV["SMTP_USERNAME"],
     password: ENV["SMTP_PASSWORD"]
