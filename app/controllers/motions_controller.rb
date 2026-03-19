@@ -2,6 +2,11 @@ class MotionsController < ApplicationController
   def index
     @motions = Motion.published.by_occurred_on.page(params[:p])
 
+    if @motions.current_page > [@motions.total_pages, 1].max
+      remaining = request.query_parameters.except("p")
+      redirect_to(remaining.any? ? "#{request.path}?#{remaining.to_query}" : request.path) and return
+    end
+
     respond_to do |format|
       format.html { render :index }
       format.json do

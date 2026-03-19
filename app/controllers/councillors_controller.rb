@@ -2,6 +2,11 @@ class CouncillorsController < ApplicationController
   def index
     @councillors = current_council_session.active_councillors.by_name.page(params[:p])
 
+    if @councillors.current_page > [@councillors.total_pages, 1].max
+      remaining = request.query_parameters.except("p")
+      redirect_to(remaining.any? ? "#{request.path}?#{remaining.to_query}" : request.path) and return
+    end
+
     respond_to do |f|
       f.html { render action: "index" }
       f.json { render json: @councillors }
